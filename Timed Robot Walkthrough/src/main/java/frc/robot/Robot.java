@@ -65,6 +65,8 @@ public class Robot extends TimedRobot {
     joystick = new XboxController(0);
     
     //you are all such great coders
+
+    // we have discovered cooperation.
   }
 
   /**
