@@ -12,8 +12,9 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
-
-
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.Compressor;
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -40,6 +41,10 @@ public class Robot extends TimedRobot {
 
   private PWMVictorSPX name;
 
+  private DoubleSolenoid solenoid;
+
+  private Compressor compress;
+
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -63,6 +68,10 @@ public class Robot extends TimedRobot {
     drive = new DifferentialDrive(leftMotors, rightMotors);
 
     joystick = new XboxController(0);
+
+    solenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
+
+    compress = new Compressor(PneumaticsModuleType.CTREPCM);
     
     //you are all such great coders
   }
@@ -110,7 +119,9 @@ public class Robot extends TimedRobot {
 
   /** This function is called once when teleop is enabled. */
   @Override
-  public void teleopInit() {}
+  public void teleopInit() {
+    compress.enableDigital();
+  }
 
   /** This function is called periodically during operator control. */
   @Override
@@ -125,12 +136,22 @@ public class Robot extends TimedRobot {
 
     drive.arcadeDrive(forwardSpeed, turnSpeed);
 
+    if (joystick.getAButtonPressed()){
+      solenoid.toggle();
+    }
+
+    else if (joystick.getBButtonPressed()){
+      solenoid.set(DoubleSolenoid.Value.kForward);
+    }
+
 
   }
 
   /** This function is called once when the robot is disabled. */
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+    compress.disable();
+  }
 
   /** This function is called periodically when disabled. */
   @Override
