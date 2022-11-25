@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
 
 
 /**
@@ -37,7 +38,7 @@ public class Robot extends TimedRobot {
 
   private XboxController joystick;
 
-  private VictorSPX
+  private PWMVictorSPX name;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -63,7 +64,7 @@ public class Robot extends TimedRobot {
 
     joystick = new XboxController(0);
     
-
+    //you are all such great coders
   }
 
   /**
