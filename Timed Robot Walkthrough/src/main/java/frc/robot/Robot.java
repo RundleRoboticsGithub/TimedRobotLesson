@@ -15,6 +15,9 @@ import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.PowerDistribution;
+
+
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -40,6 +43,7 @@ public class Robot extends TimedRobot {
   private XboxController joystick;
 
   private PWMVictorSPX name;
+  private PowerDistribution pdp;
 
   private DoubleSolenoid solenoid;
 
@@ -73,7 +77,8 @@ public class Robot extends TimedRobot {
 
     compress = new Compressor(PneumaticsModuleType.CTREPCM);
     
-    //you are all such great coders
+
+    pdp = new PowerDistribution(0, PowerDistribution.ModuleType.kCTRE);
   }
 
   /**
